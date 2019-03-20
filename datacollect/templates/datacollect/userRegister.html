@@ -1,0 +1,6 @@
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<form action={%url 'datacollect:userRegister'%} method="POST">
+{% csrf_token %}
+{{userRegisterForm.as_p}}
+<input type="submit" value="注册">
+</form>

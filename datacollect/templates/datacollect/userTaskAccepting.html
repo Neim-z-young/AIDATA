@@ -1,0 +1,10 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<p><strong>可接受的任务</strong></p>
+{% if userNAcTaskSet %}
+<p>任务名，点击接受任务</p>
+{% for nacTask in userNAcTaskSet %}
+    <li><a href='{%url 'datacollect:taskAcProcess' nacTask.task_inc_id%}'>{{ nacTask }}</a></li>
+{% endfor %}
+{% else %}
+<p><strong>任务中心还没有新任务</strong></p>
+{% endif %}

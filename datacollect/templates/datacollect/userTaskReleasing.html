@@ -1,0 +1,59 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<p><strong>添加任务</strong></p>
+
+<form action="{%url 'datacollect:userTaskReleasing'%}" method="post">
+{% csrf_token %}
+{% if error_message %}
+<p>{{error_message}}</p>
+{% endif %}
+{{taskReleaseForm.as_p}}
+<br/>
+<input type="submit" value="添加任务" />
+<br/>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script>
+$(function(){
+    $.ajax({
+        type: 'GET',
+        url: "{%url 'datacollect:ajaxGetDatatype' %}",
+        dataType: 'json',
+        success: function(data_1l){
+            var content='<option value = "">-一级类型-</option>';
+            console.log(content);
+            $.each(data_1l, function(i, item){
+                content+='<option value='+item.data_type_id+'>'+item.data_type_name+'</option>'
+                });
+            $('#id_task_onelevel_type').html(content)
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+                console.log("error");
+                    },
+    });
+
+    $("#id_task_onelevel_type").change(function() {
+      var datatype_id = $("#id_task_onelevel_type").val();
+      console.log(datatype_id);
+      $.ajax({
+        url: "{%url 'datacollect:ajaxChangeDatatype' %}",
+        data: {
+          'datatype_id': datatype_id
+        },
+        type: 'GET',
+        dataType: 'json',
+        success: function (data_2l) {
+            var content='<option value = "">-二级类型-</option>';
+            console.log(data_2l);
+            $.each(data_2l, function(i, item){
+                  content+='<option value='+item.data_2ltype_id+'>'+item.data_2ltype_name+'</option>'
+                });
+            $('#id_task_twolevel_type').html(content)
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+                console.log("error");
+                    },
+      });
+    });
+})
+</script>

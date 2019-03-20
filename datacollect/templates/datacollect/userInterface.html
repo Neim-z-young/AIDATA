@@ -1,0 +1,47 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% if error_message %}
+<p>{{error_message}}</p>
+{% endif %}
+<p>
+    欢迎用户: {{user.username}}
+</p>
+<a>任务广场</a>
+<a>我的任务</a>
+<a href={% url 'datacollect:userTaskAccepted' %}>我接受的任务</a>
+<a href={% url 'datacollect:userTaskAccepting' %}>接受新任务</a>
+<a href={% url 'datacollect:userTaskReleased' %}>我发布的任务</a>
+<a href={% url 'datacollect:userTaskReleasing' %}>发布新任务</a>
+
+{% if user.has_perms %}
+<p>
+管理员权限: 
+<a href={% url 'datacollect:adminAddDataType' %}>添加一级数据类型</a>
+<a href={% url 'datacollect:adminAddDataTwolType' %}>添加二级数据类型</a>
+</p>
+{% endif %}
+
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script>
+function logoutConfirm(){
+    var con = confirm("确认登出?");
+    if(con==true){
+        self.location.href="{% url 'datacollect:userLogout' %}";
+    }
+};
+</script>
+
+<input type="button" onclick="logoutConfirm()" value="登出" />
+
+
+<p>网站结构</p>
+<a>任务广场</a>
+<a>我的任务</a>
+<a>我接受的任务</a><!--显示列表-->
+<a>我的任务-某个任务-提交数据</a>
+<a>我的任务-某个任务-我提交的数据</a>
+<a>接受新任务</a>
+
+<a>我发布的任务</a>
+<a>我的任务-某个任务-已审核数据</a>
+<a>我的任务-某个任务-待审核数据</a>
+<a>发布新任务</a>

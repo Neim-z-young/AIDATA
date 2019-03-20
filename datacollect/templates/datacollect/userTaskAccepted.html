@@ -1,0 +1,10 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<p><strong>我接受的任务</strong></p>
+{% if userAcTaskSet %}
+<p>任务名，点击添加数据</p>
+{% for acTask in userAcTaskSet %}
+    <li><a href={% url 'datacollect:addTaskData' acTask.task_inc_id %}>{{ acTask }}</a></li>
+{% endfor %}
+{% else %}
+<p><strong>我还未接受任何任务</strong></p>
+{% endif %}

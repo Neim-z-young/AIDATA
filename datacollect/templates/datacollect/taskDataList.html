@@ -1,0 +1,8 @@
+<p>DATA CHECK</p>
+{% if dataSet %}
+{% for data in dataSet %}
+    <li><a href={%url 'datacollect:dataCheckUpdate' data.data_inc_id%}>{{data.temp_data_file.name}}</a></li>
+{% endfor %}
+{% else %}
+<p>还没有待审核的数据</p>
+{% endif %}

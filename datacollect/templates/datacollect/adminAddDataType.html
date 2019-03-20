@@ -1,0 +1,7 @@
+<p>my type</p>
+
+<form action={% url 'datacollect:adminAddDataType' %} method="POST">
+{% csrf_token %}
+{{dataTypeAddForm.as_p}}
+<input type="submit" value="提交">
+</form>

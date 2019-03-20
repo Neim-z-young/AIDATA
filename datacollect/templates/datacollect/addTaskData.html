@@ -1,0 +1,45 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<p>do nothing</p>
+{% if error_message %}<strong>{{error_message}}</strong>{% endif %}
+{% if task %}
+    <p><strong>Task name : </strong>{{task}}<br/></p>
+    <p><strong>Data one level type : </strong>{{task.task_onelevel_type}}<br/></p>
+    <p><strong>Data two level type : </strong>{{task.task_twolevel_type}}<br/></p>
+    <form  enctype="multipart/form-data" action="{%url 'datacollect:addTaskData' task.task_inc_id %}" method='post'>
+    {% csrf_token %}
+    {{dataSubmitForm.as_p}}
+    <br/>
+    <input type="submit" value="提交数据">
+    </form>
+    <br/>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script>
+    $("#id_temp_data_file").change(function() {
+        
+        var files = this.files;
+        var length = files.length;
+        var input = document.getElementById("id_temp_data_file");
+        var deImgP = input.parentElement.getElementsByTagName("div");
+        for(var i=0,len=deImgP.length; i<len; i++){
+            input.parentElement.removeChild(deImgP[0]);
+        }
+        $.each(files,function(key,value){
+                    //每次都只会遍历一个图片数据
+                    var div = document.createElement("div"),
+                        img = document.createElement("img");
+                    div.className = "preview";
+                    img.height=200;
+                    var fr = new FileReader();
+                    //异步事件
+                    fr.onload = function(){
+                        img.src=this.result;
+                        div.appendChild(img);
+                        input.parentElement.appendChild(div);
+                    }
+                    fr.readAsDataURL(value);
+                })
+    });
+    </script>
+{% else %}
+<p><strong>task is invalid!!!</strong></p>
+{% endif %}

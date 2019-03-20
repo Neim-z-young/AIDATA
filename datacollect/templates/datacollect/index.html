@@ -1,0 +1,18 @@
+<p>You are in Index Page. 
+<br />
+Please login.
+</p>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<p>
+<a href={% url 'datacollect:userRegister' %}>用户注册</a>
+</p>
+
+<form action={%url 'datacollect:userLogin'%} method="post">
+{% csrf_token %}
+{{userForm.as_p}}
+<br/>
+<input type="submit" value="用户登录" />
+</form>
+

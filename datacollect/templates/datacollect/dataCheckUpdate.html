@@ -1,0 +1,17 @@
+<p>UpdateView</p>
+{% if form %}
+    <p>
+    Data file: <a href="{{dataCheck.temp_data_file.url}}"> {{dataCheck.temp_data_file}}</a>
+    <br/>
+    Task: {{dataCheck.data_task}}
+    <br/>
+    Data description: {{dataCheck.data_description}}
+   <br/>
+    Data submit datetime: {{dataCheck.data_submit_datetime}}
+    </p>
+    <form action="" enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="审核" />
+    </form>
+{% endif %}

@@ -1,0 +1,9 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<p>assignment</p>
+{% if assignmentname %}<p>The task : {{assignmentname}} is added..</p>{% endif %}
+{% if error_message %}<p><strong>{{error_message}}</strong></p>{% endif %}
+<meta http-equiv="Refresh" content="5; url={%url 'datacollect:userInterface' %}" />
+<p>
+After 5 seconds it will redirect to user page. <br/>
+<a href={%url 'datacollect:userInterface' %}>Click here to go back user page</a>
+</p>

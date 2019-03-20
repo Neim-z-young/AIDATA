@@ -1,0 +1,11 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% if error_messages %}
+{{error_messages}}
+{% else %}
+<p>成功接受了任务: {{task}}</p>
+<meta http-equiv="Refresh" content="5; url={%url 'datacollect:userInterface' %}" />
+<p>
+After 5 seconds it will redirect to user page. <br/>
+<a href={%url 'datacollect:userInterface' %}>Click here to go back user page</a>
+</p>
+{% endif %}

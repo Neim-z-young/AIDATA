@@ -1,0 +1,9 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+{% if userReTaskSet %}
+    <strong><p>我发布的任务</p></strong>
+    {% for task in userReTaskSet %}
+    <li><a href = {% url 'datacollect:taskDataList' task.task_inc_id %}>{{task}}</a></li>
+    {% endfor %}
+{% else %}
+    <strong><p>我还未发布任何任务,不如试着发布一个</p></strong>
+{% endif %}
