@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: tbwtbwtbw
+      MYSQL_PASSWORD: qwertyuiop
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    ports:
+      - 3306:3306
