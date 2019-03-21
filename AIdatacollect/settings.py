@@ -20,10 +20,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = '2z89fq5_vax4rvjjjpu+n!*a-h^8%e)c3o18pk3n*db9&=bi20'
+SECRET_KEY = '2z89fq5_vax4rvjjjpu+n!*a-h^8%e)c3o18pk3n*db9&=bi20'
 
-with open(os.environ['HOME']+'/桌面/DjangoWebApp/myWebSecret.txt') as f:
-    SECRET_KEY = f.read().strip()
+#with open(os.environ['HOME']+'/桌面/DjangoWebApp/myWebSecret.txt') as f:
+#    SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -88,9 +88,9 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'datacollect_new_db',
-            'USER': 'root',
-            'PASSWORD': '123456789',
+            'NAME': 'wordpress',
+            'USER': 'tbwtbwtbw',
+            'PASSWORD': 'qwertyuiop',
             'HOST': 'localhost',
             'PORT': '3306',
             'default-character-set': 'utf8',

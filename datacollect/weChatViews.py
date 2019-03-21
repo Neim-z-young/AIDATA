@@ -29,12 +29,21 @@ def wechatLogin(request):
     user.save()
     login(request, user)
     #返回session_key也行吧
-    return JsonResponse({'msg': 'ok', 'the_cookie_id': request.session.session_key})
+    return JsonResponse({'msg': 'ok'})
 
 def wechatTaskList(request):
     """
     小程序请求任务列表
     """
     if request.method == 'POST':
-        taskList = list(TaskRelease.objects.all.values('task_tag', 'task_owner.username'))
+        taskList = list(TaskRelease.objects.all().values(
+            'task_tag',
+            'task_owner__username',
+            'task_description',
+            'task_data_num',
+            'task_credits',
+            'task_deadline',
+            'task_onelevel_type__data_type_name',
+            'task_twolevel_type__data_2ltype_name'
+        ))
         return JsonResponse(taskList, safe=False)

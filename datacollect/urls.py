@@ -27,5 +27,5 @@ urlpatterns = [
     path('admin/adminAddDataTwolType/', views.adminAddDataTwolType, name='adminAddDataTwolType'),
     #微信小程序视图
     path('wechat/user/login/', weChatViews.wechatLogin),
-    path('wechat/taskList', weChatViews.wechatTaskList),
+    path('wechat/taskList/', weChatViews.wechatTaskList),
 ]
