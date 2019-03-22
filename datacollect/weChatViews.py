@@ -37,6 +37,7 @@ def wechatTaskList(request):
     """
     if request.method == 'POST':
         taskList = list(TaskRelease.objects.all().values(
+            'task_inc_id',
             'task_tag',
             'task_owner__username',
             'task_description',

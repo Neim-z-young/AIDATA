@@ -56,12 +56,16 @@ class AppCustomUserWithWechatManager(AppCustomUserManager):
             raise ValueError('The wechat openid must either to be set or the email')
         if not username:
             username = email if email else openid
-        email = self.normalize_email(email)
+        
         username = self.model.normalize_username(username)
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_superuser', False)
         extra_fields.setdefault('is_active', True)
-        user = self.model(wechat_open_id=openid, username=username, email=email, **extra_fields)
+        if email is None:
+            user = self.model(wechat_open_id=openid, username=username, **extra_fields)
+        else:
+            email = self.normalize_email(email)
+            user = self.model(wechat_open_id=openid, username=username, email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user

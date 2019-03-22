@@ -1,2 +1,5 @@
+AIdatacollect/settings.py
+AIdatacollect/AIdatacollect_nginx.conf
+AIdatacollect/AIdatacollect_uwsgi.ini
 datacollect/migrations
 datacollect/__pycache__
