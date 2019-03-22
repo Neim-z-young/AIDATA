@@ -87,6 +87,7 @@ class AppCustomUser(AbstractBaseUser):
     email = models.EmailField(
         _('email address'),
         unique=True,
+        null=True,
         blank=True,
         error_messages={
             'unique': _("当前邮件已被注册,请更换邮件或找回密码"),

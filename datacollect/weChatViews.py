@@ -47,4 +47,4 @@ def wechatTaskList(request):
             'task_onelevel_type__data_type_name',
             'task_twolevel_type__data_2ltype_name'
         ))
-        return JsonResponse(taskList, safe=False)
+        return JsonResponse({'taskList': taskList}, safe=False)
