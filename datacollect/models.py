@@ -44,7 +44,7 @@ class AppUniqueUser(AppCustomUser):
     """
     存放app中认证的用户
     """
-    wechat_open_id = models.CharField(max_length=20, unique=True, null=True, blank=True,
+    wechat_open_id = models.CharField(max_length=30, unique=True, null=True, blank=True,
         verbose_name='微信openid')
     last_login_datetime = models.DateTimeField(blank=True, null=True,
         verbose_name='app用户上次登录日期时间')
@@ -56,6 +56,9 @@ class AppUniqueUser(AppCustomUser):
     objects = AppCustomUserWithWechatManager()
     class Meta:
         verbose_name = "普通用户"
+
+    def __str__(self):
+        return self.username
 
 class DataType(models.Model):
     """

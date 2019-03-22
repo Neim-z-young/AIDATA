@@ -1,0 +1,7 @@
+datacollect/migrations/
+datacollect/__pycache__/
+AIdatacollect/settings.py
+AIdatacollect/AIdatacollect_nginx.conf
+AIdatacollect/AIdatacollect_uwsgi.ini
+AIdatacollect/__pycache__/
+

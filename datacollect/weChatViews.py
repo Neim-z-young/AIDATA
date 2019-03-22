@@ -10,31 +10,43 @@ from .forms import TaskReleaseForm, UserRegisterForm, UserLoginForm, \
 import requests
 
 
-WECHAT_APPID = ''
-WECHAT_SERCET = ''
+WECHAT_APPID = 'wxea7bb1aaa082ef97'
+WECHAT_SERCET = '6ef9cbe4f5ab1b1d49ecf6a26efd6783'
 def wechatLogin(request):
     """
     小程序登录
     """
-    if request.method != 'POST':
+    if request.method != 'GET':
         return HttpResponseBadRequest('错误请求')
-    code = request.POST.get('code')
+    code = request.GET.get('code')
     form = requests.get("https://api.weixin.qq.com/sns/jscode2session?appid={0}&secret={1}&js_code={2}&grant_type=authorization_code" \
         .format(WECHAT_APPID, WECHAT_SERCET, code)).json()
-    if form['errcode']:
-        return JsonResponse([form['errmsg']])
+    print(form)
+    if 'errcode' in form:
+        return JsonResponse({'errmsg': form['errmsg']})
     openid = form['openid']
     user = authenticate(request, openid=openid)
     user.last_login_datetime = timezone.now()
     user.save()
     login(request, user)
     #返回session_key也行吧
-    return JsonResponse({'msg': 'ok', 'the_cookie_id': request.session.session_key})
+    return JsonResponse({'msg': 'ok'})
 
 def wechatTaskList(request):
     """
     小程序请求任务列表
     """
     if request.method == 'POST':
-        taskList = list(TaskRelease.objects.all.values('task_tag', 'task_owner.username'))
-        return JsonResponse(taskList, safe=False)
+        taskList = list(TaskRelease.objects.all().values(
+            'task_inc_id',
+            'task_tag',
+            'task_owner__username',
+            'task_data_num',
+            'task_credits',
+            'task_deadline',
+            'task_description',
+            'task_onelevel_type__data_type_name',
+            'task_twolevel_type__data_2ltype_name',
+            'task_create_datetime'
+            ))
+        return JsonResponse({'taskList': taskList}, safe=False)

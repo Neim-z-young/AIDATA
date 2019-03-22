@@ -26,7 +26,7 @@ class AppCustomUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_user(self, email=None, password=None, username=None, **extra_fields):
+    def create_user(self, email, password=None, username=None, **extra_fields):
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_superuser', False)
         extra_fields.setdefault('is_active', True)
@@ -48,7 +48,7 @@ class AppCustomUserWithWechatManager(AppCustomUserManager):
     """
     use_in_migrations = True
     
-    def create_user(self, openid, email, password=None, username=None, **extra_fields):
+    def create_user(self, openid, email=None, password=None, username=None, **extra_fields):
         """
         Create and save a user with the given openid username, email, and password.
         """
@@ -56,12 +56,16 @@ class AppCustomUserWithWechatManager(AppCustomUserManager):
             raise ValueError('The wechat openid must either to be set or the email')
         if not username:
             username = email if email else openid
-        email = self.normalize_email(email)
+        #email = self.normalize_email(email)
         username = self.model.normalize_username(username)
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_superuser', False)
         extra_fields.setdefault('is_active', True)
-        user = self.model(wechat_open_id=openid, username=username, email=email, **extra_fields)
+        if email==None:
+            user = self.model(wechat_open_id=openid, username=username, **extra_fields)
+        else:
+            email = self.normalize_email(email)
+            user = self.model(wechat_open_id=openid, username=username, email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
@@ -83,6 +87,7 @@ class AppCustomUser(AbstractBaseUser):
     email = models.EmailField(
         _('email address'),
         unique=True,
+        null=True,
         blank=True,
         error_messages={
             'unique': _("当前邮件已被注册,请更换邮件或找回密码"),
