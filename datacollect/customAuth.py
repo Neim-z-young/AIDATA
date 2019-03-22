@@ -13,6 +13,7 @@ class WechatOpenidAuthBackend(object):
             return AppUniqueUser.objects.get(wechat_open_id=openid)
         except AppUniqueUser.DoesNotExist:
             #创建新用户
+            #创建新用户,已设置None为插入空,而不是空字符串
             return AppUniqueUser.objects.create_user(openid=openid, email=None)
 
 class UseremailAndPasswordAuthBackend(object):

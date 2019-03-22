@@ -41,12 +41,12 @@ def wechatTaskList(request):
             'task_inc_id',
             'task_tag',
             'task_owner__username',
+            'task_description',
             'task_data_num',
             'task_credits',
             'task_deadline',
-            'task_description',
             'task_onelevel_type__data_type_name',
             'task_twolevel_type__data_2ltype_name',
             'task_create_datetime'
-            ))
+        ))
         return JsonResponse({'taskList': taskList}, safe=False)
