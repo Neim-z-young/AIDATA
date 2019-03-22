@@ -16,9 +16,9 @@ def wechatLogin(request):
     """
     小程序登录
     """
-    if request.method != 'POST':
+    if request.method != 'GET':
         return HttpResponseBadRequest('错误请求')
-    code = request.POST.get('code')
+    code = request.GET.get('code')
     form = requests.get("https://api.weixin.qq.com/sns/jscode2session?appid={0}&secret={1}&js_code={2}&grant_type=authorization_code" \
         .format(WECHAT_APPID, WECHAT_SERCET, code)).json()
     if form['errcode']:
