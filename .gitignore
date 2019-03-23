@@ -4,3 +4,4 @@ AIdatacollect/settings.py
 AIdatacollect/AIdatacollect_nginx.conf
 AIdatacollect/AIdatacollect_uwsgi.ini
 AIdatacollect/__pycache__/
+*.swp

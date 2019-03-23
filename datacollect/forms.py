@@ -33,6 +33,9 @@ class TaskReleaseForm(ModelForm):
             'task_onelevel_type': _('任务一级数据类型'),
             'task_twolevel_type': _('任务二级数据类型'),
         }
+        widgets = {
+            'task_description': forms.Textarea(attrs={'cols': 16, 'rows': 3}),
+        }
         error_messages = {
             'task_onelevel_type': {
                 'required': _('数据类型不能为空'),
