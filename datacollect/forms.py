@@ -5,8 +5,8 @@ from django.utils.translation import gettext_lazy as _
 from .models import TaskRelease, DataSubmitAndCheck, AppUniqueUser, DataType, DataTwolType
 
 class AdminLoginForm(forms.Form):
-    adminName = forms.CharField(label='Admin name', max_length=11)
-    adminPassword = forms.CharField(label='Admin password', max_length=20, widget=forms.PasswordInput)
+    adminName = forms.CharField(label='Admin name', max_length=150)
+    adminPassword = forms.CharField(label='Admin password', max_length=128, widget=forms.PasswordInput)
 
 #用户注册
 class UserRegisterForm(forms.Form):
@@ -34,7 +34,7 @@ class TaskReleaseForm(ModelForm):
             'task_twolevel_type': _('任务二级数据类型'),
         }
         widgets = {
-            'task_description': forms.Textarea(attrs={'cols': 16, 'rows': 3}),
+            'task_description': forms.Textarea(attrs={'cols': 25, 'rows': 6}),
         }
         error_messages = {
             'task_onelevel_type': {
@@ -57,11 +57,11 @@ class DataSubmitForm(ModelForm):
         }
         widgets = {
             'temp_data_file' : forms.ClearableFileInput(attrs={'multiple' : True}),
-            'data_description' : forms.Textarea(attrs={'cols': 25, 'rows': 2}),
+            'data_description' : forms.Textarea(attrs={'cols': 25, 'rows': 6}),
         }
         error_messages = {
             'data_description' : {
-                'max_length': _('数据描述不超过25个字'),
+                'max_length': _('数据描述不超过75个字'),
             },
         }
 
@@ -77,7 +77,7 @@ class DataCheckForm(ModelForm):
         }
         widgets = {
             'data_check_state' : forms.Select(choices=[('checking', 'CHECKING'), ('passed', 'PASSED'), ('failed', 'FAILED')]),
-            'data_check_description' : forms.Textarea(attrs={'cols': 15, 'rows': 2}),
+            'data_check_description' : forms.Textarea(attrs={'cols': 25, 'rows': 6}),
         }
         help_text = {
             'data_check_description' : _('数据审核状态原因描述'),
@@ -92,7 +92,7 @@ class DataTypeAddForm(ModelForm):
             'data_type_description': _('类型描述'),
         }
         widgets = {
-            'data_type_description': forms.Textarea(attrs={'cols': 15, 'rows': 2}),
+            'data_type_description': forms.Textarea(attrs={'cols': 25, 'rows': 6}),
         }
 
 class DataTwolTypeAddForm(ModelForm):
@@ -105,6 +105,6 @@ class DataTwolTypeAddForm(ModelForm):
             'data_2ltype_description': _('二级类型描述'),
         }
         widgets = {
-            'data_2ltype_description': forms.Textarea(attrs={'cols': 15, 'rows': 2}),
+            'data_2ltype_description': forms.Textarea(attrs={'cols': 25, 'rows': 6}),
         }
  

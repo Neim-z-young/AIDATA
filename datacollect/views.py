@@ -127,9 +127,9 @@ def userInterface(request):
     context = {
         'user': user,
     }
-    HASH_SESSION_KEY = '_auth_user_hash'
-    print(request.session[HASH_SESSION_KEY])
-    print('userFace'+request.session.session_key)
+    #HASH_SESSION_KEY = '_auth_user_hash'
+    #print(request.session[HASH_SESSION_KEY])
+    #print('userFace'+request.session.session_key)
     return render(request, 'datacollect/userInterface.html', context)
 
 

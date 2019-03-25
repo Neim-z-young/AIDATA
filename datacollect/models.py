@@ -68,9 +68,9 @@ class DataType(models.Model):
         verbose_name='自增ID')
     data_type_owner = models.ForeignKey(AppUniqueUser, on_delete=models.SET_NULL,
         blank=True, null=True, verbose_name='数据类型创建者')
-    data_type_name = models.CharField(max_length=10, unique=True,
+    data_type_name = models.CharField(max_length=50, unique=True,
         verbose_name='数据类型名，如“image”、“voice”')
-    data_type_description = models.CharField(max_length=30, blank=True, null=True,
+    data_type_description = models.CharField(max_length=150, blank=True, null=True,
         verbose_name='数据类型描述')
     data_type_add_datetime = models.DateTimeField(default=timezone.now,
         verbose_name='数据类型添加日期时间')
@@ -90,9 +90,9 @@ class DataTwolType(models.Model):
         blank=True, null=True, verbose_name='二级类型创建者')
     belongto_data_type = models.ForeignKey(DataType, on_delete=models.SET_NULL, blank=True, null=True,
         verbose_name='二级数据类型所属一级数据类型')
-    data_2ltype_name = models.CharField(max_length=20,
+    data_2ltype_name = models.CharField(max_length=50,
         verbose_name='二级数据类型名')
-    data_2ltype_description = models.CharField(max_length=40, blank=True, null=True,
+    data_2ltype_description = models.CharField(max_length=150, blank=True, null=True,
         verbose_name='二级数据类型描述')
     data_2ltype_add_datetime = models.DateTimeField(default=timezone.now,
         verbose_name='二级数据类型添加日期时间')
@@ -110,9 +110,9 @@ class TaskRelease(models.Model):
     """
     task_inc_id = models.AutoField(primary_key=True,
         verbose_name='任务id')
-    task_tag = models.CharField(max_length=20,
+    task_tag = models.CharField(max_length=50,
         verbose_name='任务标签')
-    task_description = models.CharField(max_length=50, blank=True, null=True,
+    task_description = models.CharField(max_length=150, blank=True, null=True,
         verbose_name='任务具体内容描述')
     task_data_num = models.PositiveIntegerField(default=20,
         verbose_name='任务所需数据量')
@@ -129,7 +129,7 @@ class TaskRelease(models.Model):
         verbose_name='任务所需数据的二级类型')
     task_create_datetime = models.DateTimeField(default=timezone.now,
         verbose_name='任务创建日期时间')
-    task_finish_state = models.CharField(max_length=10, blank=True, null=True,
+    task_finish_state = models.CharField(max_length=20, blank=True, null=True,
         verbose_name='任务完成状态')
 
     def __str__(self):
@@ -150,13 +150,13 @@ class DataSubmitAndCheck(models.Model):
         verbose_name='数据所有者')
     data_task = models.ForeignKey(TaskRelease, on_delete=models.SET_NULL, blank=True, null=True,
         verbose_name='数据所属任务')
-    data_description = models.CharField(max_length=50, blank=True, null=True,
+    data_description = models.CharField(max_length=150, blank=True, null=True,
         verbose_name='用户数据描述')
     data_submit_datetime = models.DateTimeField(default=timezone.now,
         verbose_name='数据提交日期时间')
-    data_check_state = models.CharField(max_length=10, blank=True, null=True,
+    data_check_state = models.CharField(max_length=20, blank=True, null=True,
         verbose_name='数据审核状态，可以为“通过”、“未通过”、“待审核”等等')
-    data_check_description = models.CharField(max_length=30, blank=True, null=True,
+    data_check_description = models.CharField(max_length=150, blank=True, null=True,
         verbose_name='数据审核描述，如对未通过数据的原因说明')
     
     def fileName(self):
@@ -174,7 +174,7 @@ class PictureSubmitted(models.Model):
         verbose_name='图片路径，由开头定义的变量确定,包括图片名')
     data_owner = models.ForeignKey(AppUniqueUser, on_delete=models.SET_NULL, blank=True, null=True,
         verbose_name='数据所有者')
-    data_description = models.CharField(max_length=50, blank=True, null=True,
+    data_description = models.CharField(max_length=150, blank=True, null=True,
         verbose_name='图片描述')
     data_task = models.ForeignKey(TaskRelease, on_delete=models.SET_NULL, blank=True, null=True,
         verbose_name='数据所属任务id')

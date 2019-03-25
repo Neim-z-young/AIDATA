@@ -65,6 +65,7 @@ class AppCustomUserWithWechatManager(AppCustomUserManager):
         else:
             email = self.normalize_email(email)
             user = self.model(wechat_open_id=openid, username=username, email=email, **extra_fields)
+        user.username = 'ai'+ user.id
         user.set_password(password)
         user.save(using=self._db)
         return user
