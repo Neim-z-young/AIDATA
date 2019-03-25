@@ -83,6 +83,8 @@ def wechatUserTaskAccepted(request):
     """
     用户接受的任务
     """
+    if request.method != 'POST':
+        return HttpResponseBadRequest('wrong request')
     user = request.user
     userAcTaskList = list(user.tasks_accepted.all().values(
         'task_inc_id',
