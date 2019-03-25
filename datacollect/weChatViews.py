@@ -121,6 +121,21 @@ def wechatUserTaskReleased(request):
     return JsonResponse({'userReTaskList': userReTaskList})
 
 @login_required
+def wechatGetTaskType(request):
+    """
+    获取所有任务类型
+    """
+    if request.method != 'POST':
+        return HttpResponseBadRequest('错误请求')
+    typeList = list(DataTwolType.objects.all().values(
+        'data_2ltype_id',
+        'data_2ltype_name',
+        'belongto_data_type',
+        'belongto_data_type__data_type_name'
+    ))
+    return JsonResponse({'typeList': typeList})
+
+@login_required
 def wechatUserTaskReleasing(request):
     """
     发布新任务
@@ -136,4 +151,38 @@ def wechatUserTaskReleasing(request):
         msg = {'msg': 'ok'}
     else:
         msg = {'msg': 'task wrong'}
-    return JsonResponse(msg)    
+    return JsonResponse(msg)
+
+@login_required
+def wechatUserAddData(request):
+    """
+    为接受的任务添加数据
+    """
+    if request.method != 'POST':
+        return HttpResponseBadRequest('错误请求')
+    taskId = request.POST.get('taskId')
+    try:
+        task = TaskRelease.objects.get(pk=taskId)
+    except TaskRelease.DoesNotExist:
+        msg = {'msg': 'task does not exist'}
+    else:
+        dataSubmitForm = DataSubmitForm(request.POST, request.FILES)
+        files = request.FILES.getlist('temp_data_file')
+        if dataSubmitForm.is_valid():
+            data_description  = dataSubmitForm.cleaned_data['data_description']
+            for f in files:
+                #Do something
+                tempDataSubmit = DataSubmitAndCheck(
+                    temp_data_file=f,
+                    data_owner=request.user,
+                    data_task=task,
+                    data_description=data_description,
+                    data_submit_datetime=timezone.now(),
+                    data_check_state='checking'
+                    )
+                tempDataSubmit.save()
+            msg = {'msg': 'ok'}
+        else:
+            msg = {'msg': 'form is invalid'}
+    return JsonResponse(msg)
+

@@ -32,4 +32,6 @@ urlpatterns = [
     path('wechat/taskAccepted/', weChatViews.wechatUserTaskAccepted),
     path('wechat/taskReleased/', weChatViews.wechatUserTaskReleased),
     path('wechat/taskReleasing/', weChatViews.wechatUserTaskReleasing),
+    path('wechat/getTaskType/', weChatViews.wechatGetTaskType),
+    path('wechat/userAddData/', weChatViews.wechatUserAddData),
 ]
