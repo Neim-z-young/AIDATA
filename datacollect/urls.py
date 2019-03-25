@@ -28,4 +28,8 @@ urlpatterns = [
     #微信小程序视图
     path('wechat/user/login/', weChatViews.wechatLogin),
     path('wechat/taskList/', weChatViews.wechatTaskList),
+    path('wechat/tackAccepting/', weChatViews.wechatUserTaskAccepting),
+    path('wechat/taskAccepted/', weChatViews.wechatUserTaskAccepted),
+    path('wechat/taskReleased/', weChatViews.wechatUserTaskReleased),
+    path('wechat/taskReleasing/', weChatViews.wechatUserTaskReleasing),
 ]
