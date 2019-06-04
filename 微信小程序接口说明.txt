@@ -1,0 +1,127 @@
+URL：
+    'wechat/user/login/'  
+方法:
+    'GET'
+接受数据:
+    'code'
+返回json数据：
+    'msg':'ok'  或 'errmsg'
+
+
+××××以下POST方法都需要设置请求头××××
+请求头包含session_key和csrf_token
+
+URL：
+    'wechat/taskList/'
+方法:
+    'POST'
+接受数据:
+    无
+返回json数据：
+    一个数组： 'taskList'
+	数组内容： {
+        'task_inc_id',
+        'task_tag',
+        'task_owner__username',
+        'task_description',
+        'task_data_num',
+        'task_credits',
+        'task_deadline',
+        'task_onelevel_type__data_type_name',
+        'task_twolevel_type__data_2ltype_name',
+        'task_create_datetime'
+}
+
+URL：
+    'wechat/taskAccepting/'
+方法:
+    'POST'
+接受数据:
+    'taskId'
+返回json数据：
+    'msg' 值为'ok'，说明成功；值为其它则失败
+
+URL：
+    'wechat/taskAccepted/'
+方法:
+    'POST'
+接受数据:
+    无
+返回json数据：
+    一个数组： 'userAcTaskList'
+	数组内容： {
+        'task_inc_id',
+        'task_tag',
+        'task_owner__username',
+        'task_description',
+        'task_data_num',
+        'task_credits',
+        'task_deadline',
+        'task_onelevel_type__data_type_name',
+        'task_twolevel_type__data_2ltype_name',
+        'task_create_datetime'
+}
+
+URL：
+    'wechat/taskReleased/'
+方法:
+    'POST'
+接受数据:
+    无
+返回json数据：
+    一个数组： 'userReTaskList'
+	数组内容： {
+        'task_inc_id',
+        'task_tag',
+        'task_owner__username',
+        'task_description',
+        'task_data_num',
+        'task_credits',
+        'task_deadline',
+        'task_onelevel_type__data_type_name',
+        'task_twolevel_type__data_2ltype_name',
+        'task_create_datetime'
+}
+
+URL:
+    'wechat/getTaskType/'
+方法：
+    'POST'
+接受数据：
+    无
+返回json数据：
+     一个数组： typeList
+	数组内容： {
+        'data_2ltype_id',    //二级类型id
+        'data_2ltype_name',    //二级类型名称
+        'belongto_data_type',    //所属一级类型id
+        'belongto_data_type__data_type_name'    //所属一级类型名称
+}
+
+URL：
+    'wechat/taskReleasing/'
+方法:
+    'POST'
+接受数据:
+    'task_tag',
+    'task_description',
+    'task_data_num',
+    'task_credits',
+    'task_deadline',
+    'task_onelevel_type',  //一级类型id
+    'task_twolevel_type'   //二级类型id
+返回json数据：
+    'msg'，值为'ok'说明成功；值为其它说明失败
+
+URL：
+    wechat/userAddData/
+方法:
+    'POST'
+接受数据:
+    'taskId'
+    表单数据（表单定义需要加上 enctype="multipart/form-data" ）：{
+        'temp_data_file',   //数据文件
+        'data_description'  //数据描述
+}
+返回json数据：
+    'msg'，值为'ok'说明成功；值为其它说明失败
